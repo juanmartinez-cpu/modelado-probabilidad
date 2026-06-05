@@ -1,0 +1,153 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f7fb;
+    color: #333;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    background-color: #1e3a8a;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+header h1 { margin: 0 0 5px 0; font-size: 1.8rem; }
+header p { margin: 0; font-size: 1rem; opacity: 0.9; }
+
+.menu-pestanas {
+    display: flex;
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+}
+
+.menu-pestanas button {
+    flex: 1;
+    padding: 12px;
+    background-color: #e2e8f0;
+    color: #475569;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.menu-pestanas button.active {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.columnas-layout {
+    display: flex;
+    gap: 25px;
+}
+
+.panel-controles {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.panel-visualizacion {
+    flex: 1.8;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+h2, h3 { margin-top: 0; color: #1e293b; }
+
+.input-group {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    margin-bottom: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input-group input, .input-group select {
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.boton-archivo-label {
+    display: block;
+    text-align: center;
+    background-color: #0f766e;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.boton-archivo-label:hover {
+    background-color: #115e59;
+}
+
+button#btn-calcular, button#btn-ajustar {
+    width: 100%;
+    padding: 10px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button#btn-calcular:hover, button#btn-ajustar:hover {
+    background-color: #1d4ed8;
+}
+
+.canvas-container {
+    width: 100%;
+    position: relative;
+}
+
+.resultado-probabilidad {
+    background-color: #e0f2fe;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+}
+.resultado-probabilidad p { margin: 0; }
+
+hr { border: 0; border-top: 1px solid #e2e8f0; margin: 15px 0; }
+
+.grupo-parametros {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
