@@ -5,20 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modelado de Probabilidad Continua</title>
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
- <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 15px 20px; background-color: #ffffff; border-bottom: 2px solid #e2e8f0;">
+    <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; padding: 15px 20px; background-color: #ffffff; border-bottom: 2px solid #e2e8f0;">
         <div>
             <h1 style="margin: 0; color: #1e3a8a; font-size: 1.8rem;">Modelado de Probabilidad Continua</h1>
             <p style="margin: 5px 0 0 0; color: #64748b; font-weight: 500;">Profesor: Nicolás López Cuéllar | Grado 10</p>
         </div>
+        <!-- SECCIÓN OBLIGATORIA RÚBRICA C8-C9 -->
         <div style="background-color: #f8fafc; padding: 12px 18px; border-radius: 8px; border: 2px dashed #0284c7; text-align: right; max-width: 450px;">
             <span style="font-size: 0.85rem; font-weight: 800; color: #0369a1; display: block; margin-bottom: 6px; letter-spacing: 0.5px;">🤖 AI CONVERSATIONS USED</span>
-            <a href="https://gemini.google.com/share/fef1ca6a27b9" target="_blank" style="color: #2563eb; font-size: 0.85rem; font-weight: 700; text-decoration: underline; margin-right: 12px;">Link Chat Fases C8</a>
+            <a href="https://gemini.google.com/share/15dc860201d5" id="link-c8" target="_blank" style="color: #2563eb; font-size: 0.85rem; font-weight: 700; text-decoration: underline; margin-right: 12px;">Link Chat Fases C8</a>
             <span style="color: #cbd5e1; font-weight: bold;">|</span>
-            <a href="https://gemini.google.com/share/fef1ca6a27b9" target="_blank" style="color: #0f766e; font-size: 0.85rem; font-weight: 700; text-decoration: underline; margin-left: 12px;">Link Chat Datos C9</a>
+            <a href="https://gemini.google.com/share/15dc860201d5" id="link-c9" target="_blank" style="color: #0f766e; font-size: 0.85rem; font-weight: 700; text-decoration: underline; margin-left: 12px;">Link Chat Datos C9</a>
         </div>
     </header>
 
@@ -28,16 +28,17 @@
     </nav>
 
     <main>
+        <!-- SECCIÓN C8: SIMULACIÓN INTERACTIVA -->
         <section id="seccion-c8" class="contenedor-fase">
             <div class="columnas-layout">
                 <div class="panel-controles">
                     <h2>Simulación de Distribuciones</h2>
                     <div class="input-group">
-                        <label for="selector-dist">Selecciona la Distribución:</label>
+                        <label for="selector-dist">Distribución Teórica:</label>
                         <select id="selector-dist">
                             <option value="uniforme">Uniforme</option>
                             <option value="triangular">Triangular</option>
-                            <option value="lineal">Lineal (Creciente/Decreciente)</option>
+                            <option value="lineal">Lineal (Suma Total = 1)</option>
                             <option value="porpartes">Por Partes (Piecewise)</option>
                             <option value="normal">Normal</option>
                         </select>
@@ -47,142 +48,116 @@
                     <h3>Parámetros del Modelo</h3>
                     
                     <div id="inputs-uniforme" class="grupo-parametros">
-                        <div class="input-group">
-                            <label for="uni-a">Límite inferior (a):</label>
-                            <input type="number" id="uni-a" value="0" step="any">
-                        </div>
-                        <div class="input-group">
-                            <label for="uni-b">Límite superior (b):</label>
-                            <input type="number" id="uni-b" value="10" step="any">
-                        </div>
+                        <div class="input-group"><label>Límite inferior (a):</label><input type="number" id="uni-a" value="0"></div>
+                        <div class="input-group"><label>Límite superior (b):</label><input type="number" id="uni-b" value="10"></div>
                     </div>
 
                     <div id="inputs-triangular" class="grupo-parametros" style="display:none;">
-                        <div class="input-group">
-                            <label for="tri-a">Límite inferior (a):</label>
-                            <input type="number" id="tri-a" value="0" step="any">
-                        </div>
-                        <div class="input-group">
-                            <label for="tri-b">Límite superior (b):</label>
-                            <input type="number" id="tri-b" value="10" step="any">
-                        </div>
-                        <div class="input-group">
-                            <label for="tri-c">Moda (c):</label>
-                            <input type="number" id="tri-c" value="5" step="any">
-                        </div>
+                        <div class="input-group"><label>Límite inferior (a):</label><input type="number" id="tri-a" value="0"></div>
+                        <div class="input-group"><label>Límite superior (b):</label><input type="number" id="tri-b" value="10"></div>
+                        <div class="input-group"><label>Moda (c):</label><input type="number" id="tri-c" value="5"></div>
                     </div>
 
                     <div id="inputs-lineal" class="grupo-parametros" style="display:none;">
                         <div class="input-group">
-                            <label for="lin-tipo">Tipo de Pendiente:</label>
-                            <select id="lin-tipo">
-                                <option value="creciente">Creciente (Empieza en 0)</option>
-                                <option value="decreciente">Decreciente (Termina en 0)</option>
-                            </select>
+                            <label>Dirección:</label>
+                            <select id="lin-tipo"><option value="creciente">Creciente</option><option value="decreciente">Decreciente</option></select>
                         </div>
-                        <div class="input-group">
-                            <label for="lin-a">Límite inferior (a):</label>
-                            <input type="number" id="lin-a" value="0" step="any">
-                        </div>
-                        <div class="input-group">
-                            <label for="lin-b">Límite superior (b):</label>
-                            <input type="number" id="lin-b" value="5" step="any">
-                        </div>
+                        <div class="input-group"><label>Intervalo (a):</label><input type="number" id="lin-a" value="0"></div>
+                        <div class="input-group"><label>Intervalo (b):</label><input type="number" id="lin-b" value="5"></div>
                     </div>
 
                     <div id="inputs-porpartes" class="grupo-parametros" style="display:none;">
-                        <p><small>Modelo fijo: Dos tramos uniformes continuos.</small></p>
-                        <div class="input-group">
-                            <label for="part-a">Inicio Tramo 1 (a):</label>
-                            <input type="number" id="part-a" value="0" disabled>
-                        </div>
-                        <div class="input-group">
-                            <label for="part-b">Fin Tramo 1 (b):</label>
-                            <input type="number" id="part-b" value="4" disabled>
-                        </div>
-                        <div class="input-group">
-                            <label for="part-c">Fin Tramo 2 (c):</label>
-                            <input type="number" id="part-c" value="10" disabled>
-                        </div>
+                        <p><small>Tramos uniformes acoplados fijos (Área = 1).</small></p>
+                        <div class="input-group"><label>Tramo 1 Inicio (a):</label><input type="number" id="part-a" value="0" disabled></div>
+                        <div class="input-group"><label>Tramo 1 Fin (b):</label><input type="number" id="part-b" value="4" disabled></div>
+                        <div class="input-group"><label>Tramo 2 Fin (c):</label><input type="number" id="part-c" value="10" disabled></div>
                     </div>
 
                     <div id="inputs-normal" class="grupo-parametros" style="display:none;">
-                        <div class="input-group">
-                            <label for="norm-mu">Media (μ):</label>
-                            <input type="number" id="norm-mu" value="0" step="any">
-                        </div>
-                        <div class="input-group">
-                            <label for="norm-sigma">Desviación Estándar (σ):</label>
-                            <input type="number" id="norm-sigma" value="1" min="0.001" step="any">
-                        </div>
+                        <div class="input-group"><label>Media (μ):</label><input type="number" id="norm-mu" value="0"></div>
+                        <div class="input-group"><label>Desviación (σ):</label><input type="number" id="norm-sigma" value="1" min="0.01"></div>
                     </div>
 
                     <hr>
                     <h3>Calcular Probabilidad</h3>
                     <div class="input-group">
-                        <label for="prob-x1">Desde (x1):</label>
-                        <input type="number" id="prob-x1" value="2" step="any">
+                        <label for="tipo-calculo-c8">Modo de Evaluación:</label>
+                        <select id="tipo-calculo-c8">
+                            <option value="menor">Por debajo de un punto (X &lt; x1)</option>
+                            <option value="mayor">Por encima de un punto (X &gt; x1)</option>
+                            <option value="entre" selected>Entre dos puntos (x1 &lt; X &lt; x2)</option>
+                        </select>
                     </div>
-                    <div class="input-group">
-                        <label for="prob-x2">Hasta (x2):</label>
-                        <input type="number" id="prob-x2" value="5" step="any">
-                    </div>
-                    <button id="btn-calcular">Actualizar Gráfico</button>
+                    <div class="input-group"><label>Límite x1:</label><input type="number" id="prob-x1" value="2"></div>
+                    <div class="input-group" id="contenedor-x2"><label>Límite x2:</label><input type="number" id="prob-x2" value="5"></div>
+                    <button id="btn-calcular">Actualizar Simulación</button>
                 </div>
 
                 <div class="panel-visualizacion">
-                    <div class="canvas-container">
-                        <canvas id="graficoPDF"></canvas>
-                    </div>
+                    <div class="canvas-container"><canvas id="graficoPDF"></canvas></div>
                     <div class="resultado-probabilidad">
-                        <p>Probabilidad en el intervalo: <strong id="valor-p">0.0000</strong></p>
+                        <p>Probabilidad Calculada: <strong id="valor-p">0.0000</strong></p>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- SECCIÓN C9: MODELADO CON ARCHIVOS EXCEL/CSV -->
         <section id="seccion-c9" class="contenedor-fase" style="display:none;">
             <div class="columnas-layout">
                 <div class="panel-controles">
                     <h2>Ajuste de Modelos Masivos</h2>
-                    <p><small>Sube tu archivo (.csv o .txt) con los datos de tu columna de Excel para procesar e interpretar la distribución automáticamente.</small></p>
                     
                     <div class="input-group">
-                        <label for="cargar-archivo" class="boton-archivo-label">📁 Seleccionar Archivo CSV / Datos</label>
+                        <label for="cargar-archivo" class="boton-archivo-label">📁 Cargar Dataset (1, 2 o 3)</label>
                         <input type="file" id="cargar-archivo" accept=".csv, .txt">
-                        <span id="nombre-archivo-seleccionado" style="font-size: 0.85rem; color: #64748b; margin-top: 5px; font-style: italic;">Ningún archivo seleccionado</span>
+                        <span id="nombre-archivo-seleccionado" style="font-size: 0.8rem; font-style: italic;">Ningún archivo cargado</span>
                     </div>
 
                     <div class="input-group" style="margin-top: 15px;">
-                        <label for="selector-fit">Modelo Teórico a Ajustar:</label>
+                        <label for="selector-fit">Modelo Teórico Obligatorio a Ajustar:</label>
                         <select id="selector-fit">
-                            <option value="normal">Normal (Media y Desviación)</option>
-                            <option value="uniforme">Uniforme (Mín / Máx)</option>
-                            <option value="triangular">Triangular (Moda Estimada)</option>
+                            <option value="uniforme">Distribución Uniforme</option>
+                            <option value="triangular">Distribución Triangular</option>
+                            <option value="linear">Distribución Lineal</option>
+                            <option value="piecewise">Distribución Por Partes</option>
+                            <option value="normal" selected>Distribución Normal</option>
                         </select>
                     </div>
 
-                    <button id="btn-ajustar" style="margin-top: 10px;">Analizar Archivo Masivo</button>
+                    <button id="btn-ajustar">Analizar e Histograma</button>
 
                     <div id="panel-parametros-estimados" style="margin-top: 15px; display: none;">
-                        <h3>Análisis de Muestra Extensa:</h3>
-                        <div id="valores-estimados" class="resultado-probabilidad" style="text-align: left; font-size: 0.95rem; line-height: 1.5;"></div>
+                        <h3>Parámetros Estimados:</h3>
+                        <div id="valores-estimados" class="resultado-probabilidad" style="text-align: left; font-size: 0.9rem;"></div>
+                        
+                        <hr>
+                        <h3>Calcular Probabilidad sobre Modelo Ajustado:</h3>
+                        <div class="input-group">
+                            <select id="tipo-calculo-c9">
+                                <option value="menor">X &lt; valor</option>
+                                <option value="mayor">X &gt; valor</option>
+                                <option value="entre">Entre v1 y v2</option>
+                            </select>
+                        </div>
+                        <div class="input-group"><label>Valor / v1:</label><input type="number" id="c9-v1" value="0"></div>
+                        <div class="input-group" id="contenedor-c9-v2" style="display:none;"><label>v2:</label><input type="number" id="c9-v2" value="1"></div>
+                        <button id="btn-calcular-c9" style="background-color: #0f766e;">Calcular P Muestral</button>
+                        <p style="margin-top:10px;">P estimada: <strong id="c9-resultado-p">0.0000</strong></p>
                     </div>
                 </div>
 
                 <div class="panel-visualizacion">
-                    <div class="canvas-container">
-                        <canvas id="graficoHistograma"></canvas>
-                    </div>
+                    <div class="canvas-container"><canvas id="graficoHistograma"></canvas></div>
                     <div class="resultado-probabilidad" style="background-color: #fffdec; border: 1px solid #fef08a;">
-                        <h3>Interpretación del Ajuste Empírico:</h3>
-                        <p id="interpretacion-texto" style="font-size: 1rem; font-style: italic; color: #555;">Sube un archivo de datos para procesar el histograma de frecuencias frente a la densidad continua.</p>
+                        <h3>Interpretación Empírica del Ajuste:</h3>
+                        <p id="interpretacion-texto" style="font-size: 0.95rem; font-style: italic; color: #4b5563;">Sube uno de los tres datasets simulados para generar la validación del ajuste teórico.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
